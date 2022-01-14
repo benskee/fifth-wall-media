@@ -1,23 +1,32 @@
 import React, { Component } from 'react'
 import ReactPlayer from 'react-player/youtube'
-import TextList from '../components/codeTutorial/TextList';
-import TabList from '../components/codeTutorial/TabList';
+import Tree from '../components/fileTree/FileTree';
+import CodeDisplay from '../components/common/CodeDisplay';
+import { adjust } from '../services/codeProjectService';
+import { Link } from 'react-router-dom';
+const _ = require('lodash');
+const projectData = require('../JSON/code.json')
 
-export default class CodeTutorial extends Component {
+
+export default class CodeProject extends Component {
     constructor() {
         super();
-        function range(start, end) {
-            var len = end - start + 1;
-            var a = new Array(len);
-            for (let i = 0; i < len; i++) a[i] = (start + i)*3;
-            return a;
-        }
         this.state = {
-            // tabData: require('../JSON/testFile'),
-            tabData: require('../JSON/code'),
-            stampList : range(0, 50)
+            projectData: projectData,
+            selectedFile: projectData.links,
+            file: {
+                timeAdjust: 0,
+                interval: 2.5,
+                mediaURL: "https://youtu.be/-VaxKe0TgMU"
+            },
+            playedSeconds: 0
         }
     }
+
+    handleSelect = objectPath => {
+        this.setState({ selectedFile: _.get(this.state.projectData, objectPath)})
+    }
+
     handleProgress = state => {
         this.setState({
             playedSeconds: state.playedSeconds
@@ -28,29 +37,32 @@ export default class CodeTutorial extends Component {
     }
 
     render() {
-        function adjust(sec) {
-            if (sec === 0) {
-                return -1;
-            }
-            else if (sec < 23) {
-                return 0;
-            }
-            else {
-                return sec - 22;
-            }
-        }
-        const playedSeconds = adjust(this.state.playedSeconds);
-        const stampList = this.state.stampList
-        const currentTime = Math.max.apply(Math, stampList.filter(function (x) { return x <= playedSeconds }));
-        const vals = Object.keys(this.state.tabData)
+
+        const { selectedFile, file, playedSeconds, projectData } = this.state
+        const currentTime = adjust(playedSeconds, file.timeAdjust, file.interval);
+
         return (
-            <div className="container m-2">
-                <div>
-                    <ReactPlayer url="https://youtu.be/4RVfZKedCpI" onProgress={this.handleProgress} controls />
+            <div className='row'>
+                <div className="col-md-3">
+                    <Tree onSelect={this.handleSelect} selectedFile={selectedFile} currentTime={currentTime} treeData={projectData}/>
                 </div>
-                <div>
-                    <TabList currentTime={currentTime} vals={vals} tabData={this.state.tabData}/>
-                    <TextList currentTime={currentTime} vals={vals} tabData={this.state.tabData}/>
+                <div className="col-md-9">
+                    <div>
+                        <ReactPlayer url={file.mediaURL} onProgress={this.handleProgress} controls />
+                    </div>
+                    <div className="mt-4">
+                        {selectedFile != this.state.projectData.links ? <CodeDisplay selectedFile={selectedFile} currentTime={currentTime}/> : 
+                            <div>
+                                <h3>Links</h3>
+                                <h5>The source code for the Fifth Wall Media Platform can be found at:<br/>
+                                    Frontend: <a href='https://github.com/benskee/fifth-wall-media'>https://github.com/benskee/fifth-wall-media</a> <br/>
+                                    Backend: <a href='https://github.com/benskee/fifth-wall-media-api'>https://github.com/benskee/fifth-wall-media-api</a><br/><br/>
+                                    If you would like to see more Fifth Wall Media projects go to the <Link to='/projects'>Projects</Link> page.<br/><br/>
+
+                                    If you would like to upload your own project register <Link to='/register'>here</Link>!
+                                </h5>
+                            </div>}
+                    </div>
                 </div>
             </div>
         )

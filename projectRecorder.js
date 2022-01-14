@@ -2,7 +2,7 @@ const fs = require('fs');
 const _ = require('lodash');
 
 // Relative path to folder to record
-const root = './'
+const root = './ztest'
 
 // Interval between saves in miliseconds
 const interval = 5000
@@ -11,7 +11,7 @@ const interval = 5000
 const skipFolders = /.*node_modules|config|public|\.git/
 
 // Regex list of files to skip
-const skipFiles = /.*setupTests|projectRecorder|reportWebVitals|README|(package-lock\.json)|gitignore/
+const skipFiles = /.*setupTests|projectRecorder|\.env|README|(package-lock\.json)|gitignore/
 
 
 const projectDict = {};

@@ -4,7 +4,7 @@ import NavLink from '../common/NavLink';
 
 const Header = ({ user }) => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
             <Link className="navbar-brand" to="/"><img alt="" id="fifthWallLogo" className="img-fluid pic-1" src={'/fifth_wall_logo.png'}></img><span className= 'm-4'>Fifth Wall Media</span></Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
                 aria-expanded="false" aria-label="Toggle navigation">
