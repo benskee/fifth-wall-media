@@ -18,6 +18,7 @@ const Header = ({ user }) => {
                     <NavLink link='/chartDeck' label='Chart Deck' />
                     <NavLink link='/animation' label='Animation' />
                     <NavLink link='/projects' label='Projects' />
+                    <NavLink link='/recorder' label='Recorder' />
                     {user && <NavLink link='/upload' label='Upload' />}
                 </ul>
                     {!user ? <ul id="right-links" className="navbar-nav ml-auto mt-2 mt-lg-0">

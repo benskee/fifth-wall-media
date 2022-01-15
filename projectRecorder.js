@@ -2,7 +2,7 @@ const fs = require('fs');
 const _ = require('lodash');
 
 // Relative path to folder to record
-const root = './ztest'
+const root = './'
 
 // Interval between saves in miliseconds
 const interval = 5000

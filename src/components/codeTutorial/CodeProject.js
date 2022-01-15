@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import ReactPlayer from 'react-player/youtube'
 import Tree from '../fileTree/FileTree';
-import CodeDisplay from '../common/CodeDisplay';
-import {getProject, adjust } from '../../services/codeProjectService';
+import CodeDisplay from './CodeDisplay';
+import { getProject, adjust } from '../../services/codeProjectService';
 const _ = require('lodash');
 
 

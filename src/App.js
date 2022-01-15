@@ -17,6 +17,7 @@ import Login from './views/Login';
 import Register from './views/Register';
 import "./App.css"
 import Footer from './components/layout/Footer';
+import Recorder from './views/Recorder';
 
 export default class App extends Component {
   state = {};
@@ -39,6 +40,7 @@ export default class App extends Component {
                     <Route path="/code/:id" render={props => <CodeProject  {...props}/>} />
                     <Route path="/animation/:id" render={props => <AnimationProject  {...props}/>} />
                     <Route exact path="/code" render={() => <CodeTutorial />} />
+                    <Route exact path="/recorder" render={() => <Recorder />} />
                     <Route path="/chartDeck" render={() => <Chart />} />
                     <Route exact path="/animation" render={() => <Animation />} />
                     <Route exact path="/upload" render={props => <Upload user={this.state.user} {...props}/>} />

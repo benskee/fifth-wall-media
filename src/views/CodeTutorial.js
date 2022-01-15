@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactPlayer from 'react-player/youtube'
 import Tree from '../components/fileTree/FileTree';
-import CodeDisplay from '../components/common/CodeDisplay';
+import CodeDisplay from '../components/codeTutorial/CodeDisplay';
 import { adjust } from '../services/codeProjectService';
 import { Link } from 'react-router-dom';
 const _ = require('lodash');
