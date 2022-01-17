@@ -1,5 +1,6 @@
 import React from 'react'
 import Joi from 'joi-browser';
+import { Link } from "react-router-dom"
 import Form from '../components/common/Form';
 // import projectOptions from '../components/common/ProjectOptions'
 import { upload } from './../services/uploadService';
@@ -22,15 +23,14 @@ export default class Upload extends Form {
         // projectOptions: Joi.string().required.label('projectOptions')
     }
     componentDidMount() {
-       const { user } = this.props
-        if (!user) {
-           return this.props.history.push("/login");
+        const { user } = this.props
+        if (user) {
+            const newData = {...this.state.data}
+            newData.username = user.name
+            this.setState({
+                data: newData
+            });
         }
-        const newData = {...this.state.data}
-        newData.username = user.name
-        this.setState({
-            data: newData
-        });
     }
 
     doSubmit = async () => {
@@ -50,11 +50,12 @@ export default class Upload extends Form {
     }
 
     render() {
-
+        const { user } = this.props
         return (
             <div>
                 <h1 className="m-3 mb-5">Upload Project</h1>
-                <form encType="multipart/form-data" onSubmit={this.handleSubmit} className="col-6 m-auto">
+                <Link to="/tutorial/upload"><button className="btn btn-block btn-primary col-2  m-auto">View Upload Tutorial</button></Link>
+                {user ? <form encType="multipart/form-data" onSubmit={this.handleSubmit} className="col-6 m-auto">
                     {this.renderInput("mediaURL", "Media Url")}
                     {this.renderInput("projectName", "Project Name")}
                     {this.renderInput("timeAdjust", "Time Adjust")}
@@ -62,7 +63,7 @@ export default class Upload extends Form {
                     {/* {this.renderSelect("projectOptions", "Project Options", projectOptions)} */}
                     {this.renderFileSelect(this.state.errors.selectedFile)}
                     {this.renderButton("Submit")}
-                </form>
+                </form> : <h5 className='mt-4' style={{ textAlign: 'center' }}><Link to="/login">Login</Link> or <Link to="/register">register</Link> to upload a project.</h5> }
             </div>
         )
     }

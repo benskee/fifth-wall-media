@@ -19,7 +19,7 @@ const Header = ({ user }) => {
                     <NavLink link='/animation' label='Animation' />
                     <NavLink link='/projects' label='Projects' />
                     <NavLink link='/recorder' label='Recorder' />
-                    {user && <NavLink link='/upload' label='Upload' />}
+                    <NavLink link='/upload' label='Upload' />
                 </ul>
                     {!user ? <ul id="right-links" className="navbar-nav ml-auto mt-2 mt-lg-0">
                         <NavLink link='/login' label='Login' />

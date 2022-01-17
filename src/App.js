@@ -15,9 +15,10 @@ import EditProject from './views/EditProject';
 import ProjectList from './views/ProjectList';
 import Login from './views/Login';
 import Register from './views/Register';
-import "./App.css"
+import "./Main.css"
 import Footer from './components/layout/Footer';
 import Recorder from './views/Recorder';
+import UploadTutorial from './views/UploadTutorial';
 
 export default class App extends Component {
   state = {};
@@ -40,6 +41,7 @@ export default class App extends Component {
                     <Route path="/code/:id" render={props => <CodeProject  {...props}/>} />
                     <Route path="/animation/:id" render={props => <AnimationProject  {...props}/>} />
                     <Route exact path="/code" render={() => <CodeTutorial />} />
+                    <Route exact path="/tutorial/upload" render={() => <UploadTutorial />} />
                     <Route exact path="/recorder" render={() => <Recorder />} />
                     <Route path="/chartDeck" render={() => <Chart />} />
                     <Route exact path="/animation" render={() => <Animation />} />
