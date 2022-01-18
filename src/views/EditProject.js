@@ -1,5 +1,6 @@
 import React from 'react'
 import Joi from 'joi-browser';
+import { toast } from 'react-toastify';
 import Form from '../components/common/Form';
 import { deleteProject, getProject, updateProject } from '../services/editProjectService';
 // import projectOptions from '../components/common/ProjectOptions'
@@ -28,6 +29,7 @@ export default class EditProject extends Form {
         }
 
         const file = await getProject(this.id)
+        
         if (user.name !== file.username) {
             return this.props.history.push("/projects")
         }
@@ -41,7 +43,7 @@ export default class EditProject extends Form {
     handleDelete = async () => {
         try {
             await deleteProject(this.id)
-            
+            toast.success('File deleted.')
             this.props.history.push("/projects");
         } catch (err) {
             if(err.response && err.response.status === 404) {
@@ -53,7 +55,7 @@ export default class EditProject extends Form {
     doSubmit = async () => {
         try {
             await updateProject(this.id, this.state.data)
-            
+            toast.success('File updated.')
             this.props.history.push("/projects");
         } catch (err) {
             if(err.response && err.response.status === 400) {
@@ -62,6 +64,7 @@ export default class EditProject extends Form {
             errors[type] = message;
             this.setState({ errors })
             }
+
         }
     }
 

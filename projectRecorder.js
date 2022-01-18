@@ -40,7 +40,7 @@ const copyFile = fileName => {
         });
     } else {
         var lastUpdated = _.get(projectDict, objectPath + '.lastUpdated');
-        if (_.get(projectDict, objectPath + '.stamps.' + lastUpdated) != json) {
+        if (_.get(projectDict, objectPath + '.stamps.' + lastUpdated) !== json) {
             _.set(projectDict, objectPath + '.stamps.' + s, json);
             _.set(projectDict, objectPath + '.lastUpdated', s);
         }
@@ -80,4 +80,4 @@ const saver = () => {
     s++
 }
 
-const saveTime = setInterval(saver, interval)
+setInterval(saver, interval)

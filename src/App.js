@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify'
 import Header from './components/layout/Header';
 import CodeProject from './components/codeTutorial/CodeProject';
 import FileTree from './components/fileTree/FileTree';
@@ -15,10 +16,11 @@ import EditProject from './views/EditProject';
 import ProjectList from './views/ProjectList';
 import Login from './views/Login';
 import Register from './views/Register';
-import "./Main.css"
 import Footer from './components/layout/Footer';
 import Recorder from './views/Recorder';
 import UploadTutorial from './views/UploadTutorial';
+import "react-toastify/dist/ReactToastify.css";
+import "./Main.css"
 
 export default class App extends Component {
   state = {};
@@ -32,6 +34,7 @@ export default class App extends Component {
     return (
       <div>
         <header>
+          <ToastContainer hideProgressBar='true'/>
           <Header user={this.state.user}/>
         </header>
         <main className='page-container'>

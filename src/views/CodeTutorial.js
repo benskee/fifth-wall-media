@@ -51,7 +51,7 @@ export default class CodeProject extends Component {
                         <ReactPlayer url={file.mediaURL} onProgress={this.handleProgress} controls />
                     </div>
                     <div className="mt-4">
-                        {selectedFile != this.state.projectData.links ? <CodeDisplay selectedFile={selectedFile} currentTime={currentTime}/> : 
+                        {selectedFile !== this.state.projectData.links ? <CodeDisplay selectedFile={selectedFile} currentTime={currentTime}/> : 
                             <div>
                                 <h3>Links</h3>
                                 <h5>The source code for the Fifth Wall Media Platform can be found at:<br/>

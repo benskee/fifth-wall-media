@@ -11,7 +11,7 @@ export default class Login extends Form {
 
     schema = {
         username: Joi.string().required().label('username'),
-        password: Joi.string().min(3).max(15).required(),
+        password: Joi.string().min(5).max(15).required(),
     }
 
     doSubmit = async () => {

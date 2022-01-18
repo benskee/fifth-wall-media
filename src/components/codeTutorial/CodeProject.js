@@ -10,36 +10,35 @@ export default class CodeProject extends Component {
     constructor() {
         super();
         this.state = {
-            projectData: {},
-            file: {},
-            playedSeconds: 0
+            file: {
+                body: {}
+            },
+            playedSeconds: 0,
+            selectedFile: {}
         }
     }
 
     async componentDidMount() {
         const project = await getProject(this.props.match.params.id)
         this.setState({
-            projectData: project.body,
             file: project
         })
     }
 
     handleSelect = objectPath => {
-        this.setState({ selectedFile: _.get(this.state.projectData, objectPath)})
+        this.setState({ selectedFile: _.get(this.state.file.body, objectPath, {})})
     }
 
-    handleProgress = state => {
-        this.setState({
-            playedSeconds: state.playedSeconds
-        })
-        if (!this.state.seeking) {
-            this.setState(state)
+    handleProgress = playerState => {
+        if (!this.state.seeking) {  
+            this.setState(playerState)
         }
     }
 
     render() {
 
-        const { selectedFile, file, playedSeconds, projectData } = this.state
+        const { selectedFile, file, playedSeconds } = this.state
+        const projectData = file.body
         const currentTime = adjust(playedSeconds, file.timeAdjust, file.interval);
 
         return (
@@ -52,7 +51,7 @@ export default class CodeProject extends Component {
                         <ReactPlayer url={file.mediaURL} onProgress={this.handleProgress} controls />
                     </div>
                     <div className="mt-4">
-                        {selectedFile ? <CodeDisplay selectedFile={selectedFile} currentTime={currentTime}/> : <h3>Select a file to display.</h3>}
+                        {selectedFile.name ? <CodeDisplay selectedFile={selectedFile} currentTime={currentTime}/> : <h3>Select a file to display.</h3>}
                     </div>
                 </div>
             </div>

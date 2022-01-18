@@ -14,7 +14,7 @@ export default class Register extends Form {
     schema = {
         username: Joi.string().required().label('Username'),
         email: Joi.string().required().email().label('Email'),
-        password: Joi.string().min(3).max(15).required().label('Password'),
+        password: Joi.string().min(5).max(15).required().label('Password'),
         confirmPassword: Joi.string().valid(Joi.ref('password')).required().options({ language: { any: { allowOnly: 'must match password' } } })
     }
 

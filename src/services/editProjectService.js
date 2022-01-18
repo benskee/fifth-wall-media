@@ -1,10 +1,15 @@
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 const apiEndpoint = process.env.REACT_APP_API_URL + '/file/';
 
 export const getProject = async (id) => {
-    let project = await axios.get(apiEndpoint + id);
-    return project.data.file;
+    try {
+        const project = await axios.get(apiEndpoint + id);
+        return project.data.file;
+    } catch (err) {
+        toast.error('File not found.')
+    }
 };
 
 export const updateProject = async (id, data) => {
