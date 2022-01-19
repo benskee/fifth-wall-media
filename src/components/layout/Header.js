@@ -26,7 +26,7 @@ const Header = ({ user }) => {
                         <NavLink link='/register' label='Register' /> 
                         </ul> :
                         <ul id="right-links" className="navbar-nav ml-auto mt-2 mt-lg-0">
-                            <NavLink link='/' label={<b>{user.name}</b>} />
+                            <NavLink link={`/editUser/${user._id}`} label={<b>{user.name}</b>} />
                             <NavLink link='/logout' label='Logout' />
                         </ul>}
             </div>

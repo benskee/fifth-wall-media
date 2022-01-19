@@ -21,6 +21,7 @@ import Recorder from './views/Recorder';
 import UploadTutorial from './views/UploadTutorial';
 import "react-toastify/dist/ReactToastify.css";
 import "./Main.css"
+import EditUser from './views/EditUser';
 
 export default class App extends Component {
   state = {};
@@ -49,6 +50,7 @@ export default class App extends Component {
                     <Route path="/chartDeck" render={() => <Chart />} />
                     <Route exact path="/animation" render={() => <Animation />} />
                     <Route exact path="/upload" render={props => <Upload user={this.state.user} {...props}/>} />
+                    <Route exact path="/editUser/:id" render={props => <EditUser user={this.state.user} {...props}/>} />
                     <Route exact path="/edit/:id" render={props => <EditProject user={this.state.user} {...props}/>} />
                     <Route exact path="/projects" render={() => <ProjectList user={this.state.user}/>} />
                     <Route exact path="/login" render={props => <Login {...props}/>} />

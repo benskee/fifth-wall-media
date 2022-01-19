@@ -1,7 +1,11 @@
 import axios from "axios";
 
-const apiEndpoint = process.env.REACT_APP_API_URL + "/users";
+const apiEndpoint = process.env.REACT_APP_API_URL + "/users/";
 
-export function register(user) {
-    return axios.post(apiEndpoint + '/register', user);
+export const register = user => {
+    return axios.post(apiEndpoint + 'register', user);
+}
+
+export const deleteUser = async (user) => {
+    await axios.delete(apiEndpoint + user, user)
 }
