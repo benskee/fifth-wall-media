@@ -21,7 +21,7 @@ export default class EditProject extends Form {
     
     id = this.props.match.params.id
 
-    async componentDidMount() {
+    componentDidMount = async () => {
        const { user } = this.props
        const { data } = this.state
         if (!user) {
