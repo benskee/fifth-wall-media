@@ -1,5 +1,7 @@
 const fs = require('fs');
 const _ = require('lodash');
+const readline = require("readline");
+
 
 // Relative path to folder to record
 const root = './'
@@ -74,10 +76,19 @@ const walkDir = dir => {
 
 const saver = () => {
     walkDir(root);
-    var projectString = JSON.stringify(projectDict);
-    fs.writeFileSync('projectFile.json', projectString);
-    console.log('file saved', s);
     s++
 }
 
 setInterval(saver, interval)
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+rl.question('\nFile reader is running. Press enter to stop.', function(name) {
+     var projectString = JSON.stringify(projectDict);
+    fs.writeFileSync('projectFile.json', projectString);
+    console.log('\nFile saved.\nNumber of time stamps: ', s);
+    process.exit(0);
+});
