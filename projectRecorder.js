@@ -13,7 +13,7 @@ const interval = 5000
 const skipFolders = /.*node_modules|config|public|\.git/
 
 // Regex list of files to skip
-const skipFiles = /.*setupTests|projectRecorder|\.env|README|(package-lock\.json)|gitignore/
+const skipFiles = /.*setupTests|\.env|README|(package-lock\.json)|gitignore/
 
 
 const projectDict = {};
@@ -70,7 +70,7 @@ const walkDir = dir => {
                 copyFile(currentPath);
             }
         }
-        };
+    };
 };
 
 
