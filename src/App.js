@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 import Header from './components/layout/Header';
 import CodeProject from './components/codeTutorial/CodeProject';
-import FileTree from './components/fileTree/FileTree';
 import AnimationProject from './components/animation/AnimationProject';
 import Logout from './components/user/Logout';
 import auth from './services/authService'
@@ -19,9 +18,9 @@ import Register from './views/Register';
 import Footer from './components/layout/Footer';
 import Recorder from './views/Recorder';
 import UploadTutorial from './views/UploadTutorial';
+import EditUser from './views/EditUser';
 import "react-toastify/dist/ReactToastify.css";
 import "./Main.css"
-import EditUser from './views/EditUser';
 
 export default class App extends Component {
   state = {};
@@ -29,6 +28,13 @@ export default class App extends Component {
   componentDidMount() {
     const user = auth.getCurrentUser();
     this.setState({ user });
+  }
+
+  handleUpdateUser = async (username, password) => {
+    await auth.logout()
+    await auth.login(username, password)
+    window.location = `/editUser/${this.state.user._id}`
+    toast.success('User updated.')
   }
 
   render() {
@@ -50,12 +56,11 @@ export default class App extends Component {
                     <Route path="/chartDeck" render={() => <Chart />} />
                     <Route exact path="/animation" render={() => <Animation />} />
                     <Route exact path="/upload" render={props => <Upload user={this.state.user} {...props}/>} />
-                    <Route exact path="/editUser/:id" render={props => <EditUser user={this.state.user} {...props}/>} />
+                    <Route exact path="/editUser/:id" render={props => <EditUser user={this.state.user} onUpdateUser={this.handleUpdateUser} {...props}/>} />
                     <Route exact path="/edit/:id" render={props => <EditProject user={this.state.user} {...props}/>} />
                     <Route exact path="/projects" render={() => <ProjectList user={this.state.user}/>} />
                     <Route exact path="/login" render={props => <Login {...props}/>} />
                     <Route exact path="/logout" render={() => <Logout />} />
-                    <Route exact path="/tree" render={() => <FileTree />} />
                     <Route exact path="/register" render={props => <Register {...props}/>} />
               </Switch>
             </div>

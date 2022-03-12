@@ -5,7 +5,7 @@ export default class IntroProject extends Component {
     render() {
         const { label, type } = this.props
         return (
-            <div className="card m-2">
+            <div className="card m-2 border border-dark">
                 <img className="card-img-top" src={`./static/images/${type}_image.png`} alt="Project" />
                 <div className="card-body">
                     <h5 className="card-title mb-2">{label} Intro</h5>
