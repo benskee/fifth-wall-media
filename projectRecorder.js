@@ -27,6 +27,8 @@ const copyFile = fileName => {
     var fileType = pathSplit[pathSplit.length - 1]
     var name = currentPath.split('\\').pop() + '.' + fileType;
     var objectPath = currentPath.split('\\').join('.');
+    
+    if (name === 'Links.html') name = 'Links'
 
     if (!_.get(projectDict, objectPath)) {
         _.set(projectDict, objectPath, {

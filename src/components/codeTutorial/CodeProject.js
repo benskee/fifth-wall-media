@@ -3,6 +3,7 @@ import ReactPlayer from 'react-player/youtube'
 import Tree from '../fileTree/FileTree';
 import CodeDisplay from './CodeDisplay';
 import { getProject, adjust } from '../../services/codeProjectService';
+import ProjectLinks from './ProjectLinks';
 const _ = require('lodash');
 
 
@@ -51,7 +52,7 @@ export default class CodeProject extends Component {
                         <ReactPlayer url={file.mediaURL} onProgress={this.handleProgress} controls />
                     </div>
                     <div className="mt-4">
-                        {selectedFile.name ? <CodeDisplay selectedFile={selectedFile} currentTime={currentTime}/> : <h3>Select a file to display.</h3>}
+                       {selectedFile !== projectData.Links ? <CodeDisplay selectedFile={selectedFile} currentTime={currentTime}/> : <ProjectLinks links={projectData.Links.stamps} currentTime={currentTime}/>}
                     </div>
                 </div>
             </div>

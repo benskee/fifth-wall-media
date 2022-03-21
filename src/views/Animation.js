@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactPlayer from 'react-player/youtube';
 import Gif from '../components/animation/Gif'
-import DOMPurify from "dompurify"
+import renderContainer from '../components/common/RenderContainer';
 
 export default class Animation extends Component {
     constructor() {
@@ -20,11 +20,6 @@ export default class Animation extends Component {
             this.setState(state);
         }
     }
-    renderContainer(div) {
-        if (div === '') return null;
-
-        return <div className="container mw-100 mt-2 border border-dark" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(div) }} />;
-    };
 
     render() {
         const { playedSeconds, animationData } = this.state
@@ -39,7 +34,7 @@ export default class Animation extends Component {
                         <div className="col-12 row">
                             <div className="container col-8 mt-3 py-2 border border-dark">
                                 <ReactPlayer url="https://youtu.be/0ZuHI-VW6oo" width="100%" onProgress={this.handleProgress} controls />
-                                {this.renderContainer(div1)}
+                                {renderContainer(div1)}
                             </div>
                             <Gif currentTime={currentTime} projectData={animationData}/>
                         </div>

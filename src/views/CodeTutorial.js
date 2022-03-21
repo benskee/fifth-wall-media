@@ -2,18 +2,18 @@ import React, { Component } from 'react'
 import ReactPlayer from 'react-player/youtube'
 import Tree from '../components/fileTree/FileTree';
 import CodeDisplay from '../components/codeTutorial/CodeDisplay';
+import ProjectLinks from '../components/codeTutorial/ProjectLinks';
 import { adjust } from '../services/codeProjectService';
-import { Link } from 'react-router-dom';
 const _ = require('lodash');
 const projectData = require('../JSON/code.json')
 
 
-export default class CodeProject extends Component {
+export default class CodeTutorial extends Component {
     constructor() {
         super();
         this.state = {
             projectData: projectData,
-            selectedFile: projectData.links,
+            selectedFile: projectData.Links,
             file: {
                 timeAdjust: 0,
                 interval: 2.5,
@@ -51,17 +51,7 @@ export default class CodeProject extends Component {
                         <ReactPlayer url={file.mediaURL} onProgress={this.handleProgress} controls />
                     </div>
                     <div className="mt-4">
-                        {selectedFile !== this.state.projectData.links ? <CodeDisplay selectedFile={selectedFile} currentTime={currentTime}/> : 
-                            <div>
-                                <h3>Links</h3>
-                                <h5>The source code for the Fifth Wall Media Platform can be found at:<br/>
-                                    Frontend: <a href='https://github.com/benskee/fifth-wall-media'>https://github.com/benskee/fifth-wall-media</a> <br/>
-                                    Backend: <a href='https://github.com/benskee/fifth-wall-media-api'>https://github.com/benskee/fifth-wall-media-api</a><br/><br/>
-                                    If you would like to see more Fifth Wall Media projects go to the <Link to='/projects'>Projects</Link> page.<br/><br/>
-
-                                    If you would like to upload your own project register <Link to='/register'>here</Link>!
-                                </h5>
-                            </div>}
+                        {selectedFile !== projectData.Links ? <CodeDisplay selectedFile={selectedFile} currentTime={currentTime}/> : <ProjectLinks links={projectData.Links.stamps} currentTime={currentTime}/>}
                     </div>
                 </div>
             </div>
