@@ -18,9 +18,9 @@ export default class CodeDisplay extends Component {
         return (
             <div>
                 {code ? <div>
-                    <h3>{selectedFile.name} <br/><br/></h3> 
-                    <pre className={getCodeClass()}><code id='code' className={`language-${selectedFile.fileType}`}>{JSON.parse(selectedFile.stamps[highestValue(selectedFile.stamps, currentTime)])}</code></pre>
-                </div> : <h3>Select a file to display.</h3>}
+                    <h3 className='ml-4'>{selectedFile.name} <br/><br/></h3> 
+                    <pre className={`fwm-code-block + ${getCodeClass()}`}><code id='code' className={`language-${selectedFile.fileType}`}>{JSON.parse(selectedFile.stamps[highestValue(selectedFile.stamps, currentTime)])}</code></pre>
+                </div> : <h3 className='ml-4'>Select a file to display.</h3>}
             </div>
         )
     }

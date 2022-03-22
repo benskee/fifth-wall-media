@@ -51,7 +51,7 @@ export default class CodeProject extends Component {
                     <div>
                         <ReactPlayer url={file.mediaURL} onProgress={this.handleProgress} controls />
                     </div>
-                    <div className="mt-4">
+                    <div className="mt-4 fwm-code-display">
                        {selectedFile !== projectData.Links ? <CodeDisplay selectedFile={selectedFile} currentTime={currentTime}/> : <ProjectLinks links={projectData.Links.stamps} currentTime={currentTime}/>}
                     </div>
                 </div>

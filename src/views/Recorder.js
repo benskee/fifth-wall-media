@@ -20,8 +20,7 @@ export default class Recorder extends Component {
                         <h6 className='col-8'>Run this file while you record your coding tutorial video and it will create a JSON file to sync your code with the Fifth Wall Platform.
                         </h6>
                     </div>
-                    {/* {console.log(JSON.parse(projectRecorder))} */}
-                    <pre><code className="language-javascript">
+                    <pre className='fwm-code-block'><code className="language-javascript">
                         {JSON.parse(projectRecorder)}
                     </code></pre>
                 </div>
