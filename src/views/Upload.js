@@ -26,7 +26,7 @@ export default class Upload extends Form {
         const { user } = this.props
         if (user) {
             const newData = {...this.state.data}
-            newData.username = user.name
+            newData.username = user.username
             this.setState({
                 data: newData
             });

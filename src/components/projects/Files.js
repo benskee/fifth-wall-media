@@ -14,7 +14,7 @@ export default class Files extends Component {
                         <h6 className="card-subtitle mb-2 text-muted">{file.username}</h6>
                         <p className="card-text mt-4">Type: <b>{file.projectType}</b></p>
                         <Link to={`/${file.projectType}/${file._id}`} className="btn btn-primary mr-2 mb-2">View Project</Link>
-                        {user && user.name === file.username && <Link to={`/edit/${file._id}`}><button className="btn btn-danger mb-2">Edit</button></Link>}
+                        {user && user.username === file.username && <Link to={`/edit/${file._id}`}><button className="btn btn-danger mb-2">Edit</button></Link>}
                     </div>
                 </div>
             </React.Fragment>

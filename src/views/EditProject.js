@@ -30,7 +30,7 @@ export default class EditProject extends Form {
 
         const file = await getProject(this.id)
         
-        if (user.name !== file.username) {
+        if (user.username !== file.username) {
             return this.props.history.push("/projects")
         }
         const newData = {...data}
