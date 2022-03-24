@@ -46,7 +46,7 @@ export default class CodeTutorial extends Component {
                 <div className="col-md-3">
                     <Tree onSelect={this.handleSelect} selectedFile={selectedFile} currentTime={currentTime} treeData={projectData}/>
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-9  col-xl-6">
                     <div>
                         <ReactPlayer url={file.mediaURL} onProgress={this.handleProgress} controls />
                     </div>

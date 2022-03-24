@@ -41,7 +41,7 @@ export default class App extends Component {
     return (
       <div>
         <header>
-          <ToastContainer hideProgressBar='true'/>
+          <ToastContainer hideProgressBar='true' autoClose={2500}/>
           <Header user={this.state.user}/>
         </header>
         <main className='page-container'>
