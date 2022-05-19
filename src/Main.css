@@ -142,3 +142,19 @@ ul {
     justify-content: center;
     align-items: center;
 }
+
+.nav-link {
+    color: rgba(255, 255, 255, .75) !important;
+}
+
+.nav-link:active {
+    color: rgba(255, 255, 255, 1) !important;
+}
+
+.nav-link:focus {
+    color: rgba(255, 255, 255, 1) !important;
+}
+
+.nav-link:hover {
+    color: rgba(255, 255, 255, 1) !important;
+}
