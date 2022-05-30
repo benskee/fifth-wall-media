@@ -1,44 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Joi from 'joi-browser';
 import Form from '../components/common/Form';
 import auth from '../services/authService'
 
-export default class Login extends Form {
-    state = {
-        data: {username: "", password: ""},
-        errors: {}
-    }
+function Login() {
+    const [ data, setData ] = useState({username: "", password: ""})
+    const [ errors, setErrors ] = useState({})
 
-    schema = {
+    const schema = {
         username: Joi.string().required().label('username'),
         password: Joi.string().min(5).max(15).required(),
     }
 
-    doSubmit = async () => {
+    const doSubmit = async () => {
         try {
-            const { data } = this.state
             await auth.login(data.username, data.password)
-            window.location = '/projects'
+            window.location = '/'
         } catch (err) {
             if (err.response && err.response.status === 400) {
-                const errors = { ...this.state.errors }
-                errors.username = err.response.data;
-                this.setState({ errors })
+                const newErrors = {...errors}
+                newErrors.username = err.response.data;
+                setErrors(newErrors)
             }            
         }
     }
 
-
-    render() {
-        return (
-            <div>
-                <h1 className='m-3 mb-5'>Login</h1>
-                <form onSubmit={this.handleSubmit} className="col-6 m-auto">
-                    {this.renderInput("username", "Username")}
-                    {this.renderInput("password", "Password", "password")}
-                    {this.renderButton('Login')}
-                </form>
-            </div>
-        )
+    const formProps = {
+        data,
+        setData,
+        errors,
+        setErrors,
+        schema
     }
+
+    return (
+        <div>
+            <h1 className='m-3 mb-5'>Login</h1>
+            <form onSubmit={(e) => Form.handleSubmit(formProps, doSubmit, e)} className="col-6 m-auto">
+                {Form.renderInput("username", "Username", formProps)}
+                {Form.renderInput("password", "Password", formProps, "password")}
+                {Form.renderButton('Login', formProps)}
+            </form>
+        </div>
+    )
 }
+
+export default Login
