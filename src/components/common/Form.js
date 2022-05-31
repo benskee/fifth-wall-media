@@ -10,6 +10,7 @@ import ConfirmPassword from './ConfirmPassword';
         const errors = {};
         for (let item of result.error.details)
             errors[item.path[0]] = item.message;
+        console.log('errors', errors)
         return errors
     }
 
@@ -33,7 +34,8 @@ import ConfirmPassword from './ConfirmPassword';
         const { data, setData, errors, setErrors, schema } = formProps
         const errorMessage = validateProperty(input, schema);
         let newErrors = {...errors};
-        if (errorMessage) newErrors[input.name] = errorMessage;
+        if (errorMessage) {newErrors[input.name] = errorMessage;
+        console.log('delete', newErrors[input.name])}
         else delete newErrors[input.name]
 
         const newData = {...data}
@@ -93,9 +95,10 @@ import ConfirmPassword from './ConfirmPassword';
         return(
             <div>
                 <div className="input-group mt-3">
-                    <input type="file" name='selectedFile' id='selectedFile' encType="multipart/form-data" onChange={(e) => handleChange(formProps, e)} />
+                    <input type="file" name='selectedFile' id='selectedFile' encType="multipart/form-data" onChange={(e) => fileSelectedHandler(formProps, e)} />
                 </div>
-                {formProps.error && <div className="alert alert-danger py-1">{formProps.error}</div>}
+                {console.log('formProps', formProps)}
+                {formProps.errors?.selectedFile && <div className="alert alert-danger py-1">{formProps.errors?.selectedFile}</div>}
             </div>
         )
     }
