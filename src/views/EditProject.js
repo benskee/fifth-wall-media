@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Joi from 'joi-browser';
 import { toast } from 'react-toastify';
 import Form from '../components/common/Form';
@@ -6,45 +6,48 @@ import { deleteProject, getProject, updateProject } from '../services/editProjec
 // import projectOptions from '../components/common/ProjectOptions'
 
 
-export default class EditProject extends Form {
-    state = {
-        errors: {},
-        data: { mediaURL: '', projectName: '', timeAdjust: '', interval: '' }
-    };
+function EditProject(props) {
+    console.log('props', props)
+    const [ data, setData ] = useState({ 
+        mediaURL: '', 
+        projectName: '', 
+        timeAdjust: '', 
+        interval: ''
+    })
+    const [ errors, setErrors ] = useState({})
 
-    schema = {
+    const schema = {
         projectName: Joi.string().required().label('Project Name'),
         mediaURL: Joi.string().required().label('Media Url'),
         timeAdjust: Joi.number().required().label('Time Adjust'),
         interval: Joi.number().required().label('Interval')
     }
     
-    id = this.props.match.params.id
+    const id = props.match.params.id
 
-    componentDidMount = async () => {
-       const { user } = this.props
-       const { data } = this.state
+
+    useEffect(async () => {
+       const { user } = props
+       
         if (!user) {
-           return this.props.history.push("/login");
+           return props.history.push("/login");
         }
 
-        const file = await getProject(this.id)
+        const file = await getProject(id)
         
         if (user.username !== file.username) {
-            return this.props.history.push("/projects")
+            return props.history.push("/projects")
         }
         const newData = {...data}
         for (const attr in newData) { newData[attr] = file[attr]}
-        this.setState({
-            data: newData
-        })
-    }
+        setData(newData)
+    }, [])
 
-    handleDelete = async () => {
+    const handleDelete = async () => {
         try {
-            await deleteProject(this.id)
+            await deleteProject(id)
             toast.success('File deleted.')
-            this.props.history.push("/projects");
+            props.history.push("/projects");
         } catch (err) {
             if(err.response && err.response.status === 404) {
                 alert("File already deleted.")
@@ -52,39 +55,46 @@ export default class EditProject extends Form {
         }
     }
 
-    doSubmit = async () => {
+    const doSubmit = async () => {
         try {
-            await updateProject(this.id, this.state.data)
+            await updateProject(id, data)
             toast.success('File updated.')
-            this.props.history.push("/projects");
+            props.history.push("/projects");
         } catch (err) {
             if(err.response && err.response.status === 400) {
-            const errors = { ...this.state.errors };
+            const newErrors = { ...errors };
             const { type, message } = err.response.data
-            errors[type] = message;
-            this.setState({ errors })
+            newErrors[type] = message;
+            setErrors({ newErrors })
             }
 
         }
     }
 
-    render() {
-
-        return (
-            <div>
-                <h1 className="m-3 mb-5">Edit Project</h1>
-
-                <div className="col-6 m-auto">
-                    <button className="btn btn-danger mb-4" onClick={() => this.handleDelete()}>Delete</button>
-                    <form onSubmit={this.handleSubmit}>
-                        {this.renderInput("mediaURL", "Media Url")}
-                        {this.renderInput("projectName", "Project Name")}
-                        {this.renderInput("timeAdjust", "Time Adjust")}
-                        {this.renderInput("interval", "Interval")}
-                        {this.renderButton("Submit")}
-                    </form>
-                </div>
-            </div>
-        )
+    const formProps = {
+        data,
+        setData,
+        errors,
+        setErrors,
+        schema
     }
+
+    return (
+        <div>
+            <h1 className="m-3 mb-5">Edit Project</h1>
+
+            <div className="col-6 m-auto">
+                <button className="btn btn-danger mb-4" onClick={() => handleDelete()}>Delete</button>
+                <form onSubmit={(e) => Form.handleSubmit(formProps, doSubmit, e)}>
+                    {Form.renderInput("mediaURL", "Media Url", formProps)}
+                    {Form.renderInput("projectName", "Project Name", formProps)}
+                    {Form.renderInput("timeAdjust", "Time Adjust", formProps)}
+                    {Form.renderInput("interval", "Interval", formProps)}
+                    {Form.renderButton("Submit", formProps)}
+                </form>
+            </div>
+        </div>
+    )
 }
+
+export default EditProject
