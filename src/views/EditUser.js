@@ -31,14 +31,11 @@ function EditUser(props) {
         setData(newData)
     }
 
-    useEffect(()=> {
-        if(props.user) assignData();
-    }, [])
-
     const prevUser = useRef();
 
     useEffect(() => {
         prevUser.current = props.user
+        if(props.user) assignData();
     }, [props.user])
     
     useEffect(() => {
