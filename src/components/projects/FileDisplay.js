@@ -11,7 +11,7 @@ function FileDisplay(props) {
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
 
-    const pageSize = 
+    const pageSize = 5
 
     useEffect(async () => {
         let fileData = await getData()
@@ -27,6 +27,7 @@ function FileDisplay(props) {
 
     const count = allFiles.length
     const files = Paginate(allFiles, currentPage, pageSize)
+    
     return (
         <div>
             <ul className="row m3">

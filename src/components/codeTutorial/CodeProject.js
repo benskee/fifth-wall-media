@@ -33,8 +33,8 @@ function CodeProject(props) {
             <div className="col-md-3">
                 <Tree onSelect={handleSelect} selectedFile={selectedFile} currentTime={currentTime} treeData={projectData}/>
             </div>
-            <div className="col-md-9 col-xl-6">
-                <div>
+            <div className="col-9 col-xxl-6">
+                <div className='player-div'>
                     <ReactPlayer url={file.mediaURL} onProgress={handleProgress} controls />
                 </div>
                 <div className="mt-4 fwm-code-display">

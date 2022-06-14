@@ -3,8 +3,8 @@ import Branch from './Branch'
 import Leaf from './Leaf';
 
 function Tree(props) {
-
     const { onSelect, selectedFile, currentTime, treeData } = props
+
     return (
         <ul className="fileTree">
             {Object.keys(treeData).map(branch => {
