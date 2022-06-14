@@ -1,22 +1,22 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Branch from './Branch'
 import Leaf from './Leaf';
 
-export default class Tree extends Component {
+function Tree(props) {
+    const { onSelect, selectedFile, currentTime, treeData } = props
 
-    render() {
-        const { onSelect, selectedFile, currentTime, treeData } = this.props
-        return (
-            <ul className="fileTree">
-                {Object.keys(treeData).map(branch => {
-                    if (treeData[branch]["folder"] === true) {
-                            return <Branch key={branch} treeData={treeData[branch]} branchName={branch} objectPath={branch}  onSelect={onSelect} selectedFile={selectedFile} currentTime={currentTime}/>
-                        } else {
-                            return <Leaf key={branch} name={treeData[branch]['name']} objectPath={branch} onSelect={onSelect} selectedFile={selectedFile} start={treeData[branch]['start']} currentTime={currentTime}/>
-                            }
+    return (
+        <ul className="fileTree">
+            {Object.keys(treeData).map(branch => {
+                if (treeData[branch]["folder"] === true) {
+                        return <Branch key={branch} treeData={treeData[branch]} branchName={branch} objectPath={branch}  onSelect={onSelect} selectedFile={selectedFile} currentTime={currentTime}/>
+                    } else {
+                        return <Leaf key={branch} name={treeData[branch]['name']} objectPath={branch} onSelect={onSelect} selectedFile={selectedFile} start={treeData[branch]['start']} currentTime={currentTime}/>
                         }
-                )}
-            </ul>
-        )
-    }
+                    }
+            )}
+        </ul>
+    )
 }
+
+export default Tree

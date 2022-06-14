@@ -1,21 +1,21 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class Gif extends Component {
+function Gif(props) {
 
-    render() {
-        const { projectData, currentTime } = this.props
-        var gif = ''
-        var link = '';
-        
-        projectData[currentTime] ? gif = projectData[currentTime]["gif"] : gif = ''
-        projectData[currentTime] ? link = projectData[currentTime]["link"] : link = ''
+    const { projectData, currentTime } = props
+    let gif = ''
+    let link = '';
+    
+    projectData[currentTime] && (gif = projectData[currentTime]["gif"])
+    projectData[currentTime] && (link = projectData[currentTime]["link"])
 
-        return (
-            <div className="col-4" id= "gif">
-                <a href={link} target="_blank" rel="noopener noreferrer">
-                    <img src={gif} alt="" />
-                </a>
-            </div>
-        )
-    }
+    return (
+        <div className="col-4" id= "gif">
+            <a href={link} target="_blank" rel="noopener noreferrer">
+                <img src={gif} alt=""/>
+            </a>
+        </div>
+    )
 }
+
+export default Gif
