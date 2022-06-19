@@ -13,7 +13,7 @@ function CodeDisplay(props) {
     }, [selectedFile, code])
 
     return (
-        <div>
+        <div className='code-container'>
             {code ? <div>
                 <h3 className='code-title'>{selectedFile.name}</h3> 
                 <pre className={`fwm-code-block + ${getCodeClass()}`}><code id='code' className={`language-${selectedFile.fileType}`}>{JSON.parse(code)}</code></pre>

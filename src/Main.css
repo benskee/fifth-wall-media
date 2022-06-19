@@ -17,11 +17,15 @@ a:hover {
     max-width: 70%;
 }
 
+.code-container {
+    border-bottom: solid;
+    border-right: solid;
+}
+
 .code-title {
     text-align: center;
     padding-top: 15px;
     padding-bottom: 5px;
-    border-right: solid;
     margin-bottom: 0px;
 }
 
@@ -179,8 +183,6 @@ pre {
 }
 
 .render-container {
-    border-bottom: solid;
-    border-right: solid;
     padding: 20px;
 }
 
