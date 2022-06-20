@@ -7,7 +7,6 @@ import { deleteProject, getProject, updateProject } from '../services/editProjec
 
 
 function EditProject(props) {
-    console.log('props', props)
     const [ data, setData ] = useState({ 
         mediaURL: '', 
         projectName: '', 
@@ -25,18 +24,17 @@ function EditProject(props) {
     
     const id = props.match.params.id
 
-
     useEffect(async () => {
-       const { user } = props
+       const { user, history } = props
        
         if (!user) {
-           return props.history.push("/login");
+           return history.push("/login");
         }
 
         const file = await getProject(id)
         
-        if (user.username !== file.username) {
-            return props.history.push("/projects")
+        if (user._id !== file.userId) {
+            return history.push("/projects")
         }
         const newData = {...data}
         for (const attr in newData) { newData[attr] = file[attr]}

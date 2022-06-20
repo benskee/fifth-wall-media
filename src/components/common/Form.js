@@ -10,7 +10,6 @@ import ConfirmPassword from './ConfirmPassword';
         const errors = {};
         for (let item of result.error.details)
             errors[item.path[0]] = item.message;
-        console.log('errors', errors)
         return errors
     }
 
@@ -35,7 +34,7 @@ import ConfirmPassword from './ConfirmPassword';
         const errorMessage = validateProperty(input, schema);
         let newErrors = {...errors};
         if (errorMessage) {newErrors[input.name] = errorMessage;
-        console.log('delete', newErrors[input.name])}
+        }
         else delete newErrors[input.name]
 
         const newData = {...data}
@@ -95,9 +94,14 @@ import ConfirmPassword from './ConfirmPassword';
         return(
             <div>
                 <div className="input-group mt-3">
-                    <input type="file" name='selectedFile' id='selectedFile' encType="multipart/form-data" onChange={(e) => fileSelectedHandler(formProps, e)} />
+                    <label htmlFor="selectedFile" class="btn btn-outline-primary">
+                        <input hidden type="file" name='selectedFile' id='selectedFile' encType="multipart/form-data" onChange={(e) => fileSelectedHandler(formProps, e)} />
+                        Choose file
+                    </label>
+                    <p className="ml-3 mt-2">
+                        {formProps.data.selectedFile?.name ? formProps.data.selectedFile.name : "No file selected"}
+                    </p>
                 </div>
-                {console.log('formProps', formProps)}
                 {formProps.errors?.selectedFile && <div className="alert alert-danger py-1">{formProps.errors?.selectedFile}</div>}
             </div>
         )
