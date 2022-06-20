@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Joi from 'joi-browser';
 import Form from '../components/common/Form';
 import auth from '../services/authService'
+import WelcomeBanner from '../components/welcome/WelcomeBanner';
 
 function Login() {
     const [ data, setData ] = useState({username: "", password: ""})
@@ -34,13 +35,17 @@ function Login() {
     }
 
     return (
-        <div>
-            <h1 className='m-3 mb-5'>Login</h1>
-            <form onSubmit={(e) => Form.handleSubmit(formProps, doSubmit, e)} className="col-6 m-auto">
-                {Form.renderInput("username", "Username", formProps)}
-                {Form.renderInput("password", "Password", formProps, "password")}
-                {Form.renderButton('Login', formProps)}
-            </form>
+        <div className='row'>
+            <img className="image-fluid col-5 welcome-image d-none d-lg-flex" src="./static/images/hexagon_warp.jpg" alt="hexagon_warp" />
+            <div className="container col-7 mx-auto">
+                <WelcomeBanner text={"Don't have an account?"} link={"/register"} buttonLabel={"Register"} />
+                <h1 className='m-3 mb-3'>Login</h1>
+                <form onSubmit={(e) => Form.handleSubmit(formProps, doSubmit, e)}>
+                    {Form.renderInput("username", "Username", formProps)}
+                    {Form.renderInput("password", "Password", formProps, "password")}
+                    {Form.renderButton('Login', formProps)}
+                </form>
+            </div>
         </div>
     )
 }

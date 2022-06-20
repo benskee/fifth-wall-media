@@ -2,6 +2,10 @@ a:hover {
     text-decoration: none;
 }
 
+.banner-text {
+    margin: 0px 10px 0px 0px;
+}
+
 .card {
     width: 14rem;
     transition: all 0.2s ease;
@@ -210,4 +214,8 @@ pre {
 
 ul {
     list-style-type: none;
+}
+
+.welcome-image {
+    margin-top: -8px;
 }
