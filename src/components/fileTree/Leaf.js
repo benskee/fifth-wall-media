@@ -6,10 +6,10 @@ function Leaf(props) {
         <>
             {start <= currentTime ? <li onClick={() => onSelect(objectPath)}>
                 {selectedFile?.objectPath === objectPath ?
-                    <span className="selectedFile">
+                    <span className="leaf selectedFile">
                         {name}
                     </span> :
-                    <span>{name}</span>}
+                    <span className='leaf'>{name}</span>}
             </li> : null}
         </>
     );

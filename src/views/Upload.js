@@ -8,6 +8,7 @@ import { upload } from './../services/uploadService';
 function Upload(props) {
     const [ data, setData ] = useState({ 
         username: '', 
+        userId: '', 
         selectedFile: null, 
         mediaURL: '', 
         projectName: '', 
@@ -19,6 +20,7 @@ function Upload(props) {
 
     const schema = {
         username: Joi.string().required().label('Username'),
+        userId: Joi.string().required().label('User ID'),
         projectName: Joi.string().required().label('Project Name'),
         mediaURL: Joi.string().required().label('Media Url'),
         projectType: Joi.string().required().label('Project Type'),
@@ -34,6 +36,7 @@ function Upload(props) {
         if (user) {
             const newData = {...data}
             newData.username = user.username
+            newData.userId = user._id
             setData(newData)
         }
     }, [])
@@ -65,7 +68,9 @@ function Upload(props) {
     return (
         <div>
             <h1 className="m-3 mb-5">Upload Project</h1>
-            <Link to="/tutorial/upload"><button className="btn btn-block btn-primary col-2  m-auto">View Upload Tutorial</button></Link>
+            <div className="col-3 m-auto">
+                <Link to="/tutorial/upload"><button className="btn btn-block btn-primary">View Upload Tutorial</button></Link>
+            </div>
             {user ? <form encType="multipart/form-data" onSubmit={(e)=>Form.handleSubmit(formProps, doSubmit, e)} className="col-6 m-auto">
                 {Form.renderInput("mediaURL", "Media Url", formProps)}
                 {Form.renderInput("projectName", "Project Name", formProps)}
@@ -74,7 +79,7 @@ function Upload(props) {
                 {/* {Form.renderSelect("projectOptions", "Project Options", projectOptions)} */}
                 {Form.renderFileSelect(formProps)}
                 {Form.renderButton("Submit", formProps)}
-            </form> : <h5 className='mt-4' style={{ textAlign: 'center' }}><Link to="/login">Login</Link> or <Link to="/register">register</Link> to upload a project.</h5> }
+            </form> : <h5 className='mt-4 text-center' ><Link to="/login">Login</Link> or <Link to="/register">register</Link> to upload a project.</h5> }
         </div>
     )
 }
