@@ -3,6 +3,7 @@ import Joi from 'joi-browser';
 import Form from '../components/common/Form';
 import { register } from '../services/userService'
 import auth from '../services/authService'
+import WelcomeBanner from './../components/welcome/WelcomeBanner';
 
 function Register() {
     const [ data, setData ] = useState({ 
@@ -46,15 +47,19 @@ function Register() {
     }
 
     return (
-        <div>
-            <h1 className='m-3 mb-2'>Register</h1>
-            <form onSubmit={(e) => Form.handleSubmit(formProps, doSubmit, e)} className="col-6 m-auto">
-                {Form.renderInput("username", "Username", formProps)}
-                {Form.renderInput("email", "Email", formProps)}
-                {Form.renderInput("password", "Password", formProps, "password")}
-                {Form.renderConfirmPassword("confirmPassword", "Confirm Password", formProps)}
-                {Form.renderButton('Register', formProps)}
-            </form>
+         <div className='row'>
+            <img className="image-fluid col-5 welcome-image d-none d-lg-flex" src="./static/images/hexagon_warp.jpg" alt="hexagon_warp" />
+            <div className="container col-7 mx-auto">
+                <WelcomeBanner text={"Already have an account?"} link={"/login"} buttonLabel={"Login"} />
+                <h1 className='m-3 mb-2'>Register</h1>
+                <form onSubmit={(e) => Form.handleSubmit(formProps, doSubmit, e)}>
+                    {Form.renderInput("username", "Username", formProps)}
+                    {Form.renderInput("email", "Email", formProps)}
+                    {Form.renderInput("password", "Password", formProps, "password")}
+                    {Form.renderConfirmPassword("confirmPassword", "Confirm Password", formProps)}
+                    {Form.renderButton('Register', formProps)}
+                </form>
+            </div>
         </div>
     )
 }
